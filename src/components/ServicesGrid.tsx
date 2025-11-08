@@ -10,8 +10,13 @@ const ServicesGrid: React.FC = () => {
     
     const renderIcon = (icon: React.ReactNode) => {
         if (!React.isValidElement(icon)) return icon;
-        const size = icon.props.size ?? 40;
-        return React.cloneElement(icon, { size, color: 'currentColor', 'aria-hidden': true });
+        const { size } = icon.props as { size?: number };
+        const resolvedSize = typeof size === 'number' ? size : 28;
+        return React.cloneElement(icon, {
+            size: resolvedSize,
+            color: 'currentColor',
+            'aria-hidden': true,
+        } as { size?: number; color?: string; 'aria-hidden'?: boolean });
     };
 
     return (
@@ -27,7 +32,7 @@ const ServicesGrid: React.FC = () => {
                     {services.map((service) => (
                         <div key={service.name} className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200 hover:shadow-lg hover:border-primary/70 transition-all duration-300">
                             <div className="flex justify-center mb-5">
-                                <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner shadow-primary/5">
+                                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-inner shadow-primary/5">
                                     {renderIcon(service.icon)}
                                 </div>
                             </div>

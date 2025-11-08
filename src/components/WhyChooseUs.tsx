@@ -5,10 +5,9 @@ import { whyChooseUsPoints } from '../constants';
 const WhyChooseUs: React.FC = () => {
     const renderIcon = (icon: React.ReactNode) => {
         if (!React.isValidElement(icon)) return icon;
-        const baseClasses = 'w-4 h-4';
-        const existing = icon.props.className ?? '';
-        const merged = Array.from(new Set(`${existing} ${baseClasses}`.trim().split(/\s+/))).join(' ');
-        return React.cloneElement(icon, { className: merged });
+        const existingClassName = (icon.props as { className?: string }).className ?? '';
+        const merged = Array.from(new Set(`${existingClassName} w-6 h-6 text-primary`.trim().split(/\s+/))).join(' ');
+        return React.cloneElement(icon, { className: merged } as { className?: string });
     };
 
     return (
@@ -22,11 +21,9 @@ const WhyChooseUs: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {whyChooseUsPoints.map((point) => (
-                        <div key={point.title} className="bg-secondary rounded-2xl p-8 border border-white/60 shadow-sm hover:shadow-md transition-shadow">
-                             <div className="shrink-0 mb-5">
-                                <div className="">
-                                    {renderIcon(point.icon)}
-                                </div>
+                        <div key={point.title} className="bg-secondary rounded-2xl p-8 border border-white/60 shadow-sm hover:shadow-md transition-shadow text-center">
+                             <div className="shrink-0 mb-5 flex justify-center">
+                                {renderIcon(point.icon)}
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">{point.title}</h3>
                             <p className="text-gray-600">{point.description}</p>
