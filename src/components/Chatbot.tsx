@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { allServicesData } from '../constants';
 
 // Extend Window interface to include aistudio property
 declare global {
@@ -28,6 +29,13 @@ const SendIcon: React.FC<{ className?: string }> = ({ className }) => (
     </svg>
 );
 
+const CONTACT_DETAILS = {
+    mainPhone: '+639178901234',
+    emergencyPhone: '+639187654321',
+    email: 'info@klimapro.ph',
+    serviceArea: 'Metro Manila, Philippines',
+} as const;
+
 interface Message {
     sender: 'user' | 'bot';
     text: string | React.ReactNode;
@@ -51,12 +59,21 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
     const currentIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
     const currentSetIsOpen = externalSetIsOpen || setIsOpen;
 
-    const contactDetails = {
-        mainPhone: '+639178901234',
-        emergencyPhone: '+639187654321',
-        email: 'info@klimapro.ph',
-        serviceArea: 'Metro Manila, Philippines',
-    };
+    const knowledgeBase = useMemo(() => {
+        const serviceSummaries = Object.values(allServicesData)
+            .map((service) => `Service: ${service.name}. Tagline: ${service.tagline}. Description: ${service.description} Key benefits: ${service.benefits.join(', ')}. Gallery count: ${service.galleryImages.length}.`)
+            .join('\n');
+
+        return [
+            'Brand: Klima Pro HVAC services.',
+            `Primary phone: ${CONTACT_DETAILS.mainPhone}. Emergency line: ${CONTACT_DETAILS.emergencyPhone}.`,
+            `Email: ${CONTACT_DETAILS.email}.`,
+            `Service area: ${CONTACT_DETAILS.serviceArea}.`,
+            'Core promise: fast, reliable heating, cooling, and air quality solutions with 24/7 support.',
+            'Available services with summaries:',
+            serviceSummaries,
+        ].join('\n');
+    }, []);
 
     const handleChatbotToggle = () => {
         const newState = !currentIsOpen;
@@ -101,7 +118,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
     
     useEffect(() => {
         if(currentIsOpen && messages.length === 0 && apiKeySelected === true){
-             setMessages([{ sender: 'bot', text: "Hello! I'm the HVAC Pro Assistant. How can I help you with our heating, cooling, or air quality services today?" }]);
+             setMessages([{ sender: 'bot', text: "Hi! I'm the Klima Pro assistant. Ask me anything about our HVAC services, scheduling, or support." }]);
         }
     }, [currentIsOpen, messages.length, apiKeySelected]);
 
@@ -129,15 +146,19 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
         const quickReplies: string[] = [];
 
         if (['phone', 'call', 'number', 'contact number', 'reach you'].some((keyword) => normalized.includes(keyword))) {
-            quickReplies.push(`You can reach Klima Pro at ${contactDetails.mainPhone}, or ${contactDetails.emergencyPhone} for urgent calls.`);
+            quickReplies.push(`You can reach Klima Pro at ${CONTACT_DETAILS.mainPhone}, or ${CONTACT_DETAILS.emergencyPhone} for urgent calls.`);
         }
 
         if (['email', 'mail', 'email address'].some((keyword) => normalized.includes(keyword))) {
-            quickReplies.push(`Send us a note at ${contactDetails.email}.`);
+            quickReplies.push(`Send us a note at ${CONTACT_DETAILS.email}.`);
         }
 
         if (['location', 'address', 'where are you', 'where located', 'service area'].some((keyword) => normalized.includes(keyword))) {
-            quickReplies.push(`We serve clients across ${contactDetails.serviceArea}.`);
+            quickReplies.push(`We serve clients across ${CONTACT_DETAILS.serviceArea}.`);
+        }
+
+        if (['price', 'pricing', 'cost', 'rate', 'estimate', 'how much', 'quote', 'fees'].some((keyword) => normalized.includes(keyword))) {
+            quickReplies.push('Every project is unique, so we provide tailored estimates. Please book a quick call with our team so we can review your system and share accurate pricing.');
         }
 
         if (quickReplies.length > 0) {
@@ -170,10 +191,18 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
         try {
             const model = ai.getGenerativeModel({ 
                 model: 'gemini-2.0-flash-exp',
-                systemInstruction: "You are 'ProBot', the friendly and knowledgeable virtual assistant for HVAC Pro. Your expertise is strictly limited to heating, ventilation, and air conditioning (HVAC) services. This includes topics like AC installation, AC repair, furnace and heating services, duct cleaning, heat pumps, our maintenance 'Comfort Plans', and financing options. Do not answer questions about any other subjects, including math, history, or general knowledge. If asked an unrelated question, you must politely decline and pivot back to how you can assist with their HVAC needs. For example, say: 'I can only assist with questions about our HVAC services. How can I help you with your heating or cooling system today?' Keep responses short and focused—no more than three sentences while staying helpful. Your goal is to provide helpful, accurate information about our services and encourage users to book an appointment."
+                systemInstruction: "You are 'ProBot', the Klima Pro virtual assistant. Only answer questions connected to Klima Pro's HVAC services, scheduling, financing, maintenance, or website content. Rely on the provided Klima Pro knowledge base. If a user asks about pricing or costs, do not supply numbers—invite them to book a call for a tailored estimate. If you cannot find information in the knowledge base, say you couldn't locate that detail and suggest contacting the team. Keep responses short and focused (maximum three sentences) while staying helpful."
             });
             
-            const result = await model.generateContent(input);
+            const prompt = [
+                'Klima Pro knowledge base:',
+                knowledgeBase,
+                'User question:',
+                input.trim(),
+                'Respond using only the knowledge base above. If the answer is not present, let the user know and guide them to contact Klima Pro.'
+            ].join('\n\n');
+
+            const result = await model.generateContent(prompt);
             const response = await result.response;
             const text = response.text();
 
@@ -207,7 +236,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
                     <header className="bg-linear-to-r from-primary to-blue-700 text-white px-4 py-3 flex justify-between items-center rounded-t-xl">
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                            <h3 className="font-semibold text-base">HVAC Pro Support</h3>
+                            <h3 className="font-semibold text-base">Klima Pro Support</h3>
                         </div>
                         <button onClick={() => currentSetIsOpen(false)} className="hover:bg-white/20 rounded-full p-1 transition-colors" aria-label="Close chat">
                             <CloseIcon className="w-5 h-5" />
