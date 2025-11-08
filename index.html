@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HVAC Pro | Fast & Reliable Service in Anytown</title>
+    <meta name="description" content="HVAC Pro offers fast, reliable heating and air conditioning repair, installation, and maintenance in Anytown. 24/7 emergency service available. Book your free estimate today!">
+    <meta name="keywords" content="HVAC, heating, cooling, AC repair, furnace repair, air conditioning, Anytown HVAC">
+    <meta name="author" content="HVAC Pro">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hvac-pro-example.com/">
+    <meta property="og:title" content="HVAC Pro | Fast & Reliable Service in Anytown">
+    <meta property="og:description" content="HVAC Pro offers fast, reliable heating and air conditioning repair, installation, and maintenance in Anytown. 24/7 emergency service available.">
+    <meta property="og:image" content="https://picsum.photos/1200/630?image=1062">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://hvac-pro-example.com/">
+    <meta property="twitter:title" content="HVAC Pro | Fast & Reliable Service in Anytown">
+    <meta property="twitter:description" content="HVAC Pro offers fast, reliable heating and air conditioning repair, installation, and maintenance in Anytown. 24/7 emergency service available.">
+    <meta property="twitter:image" content="https://picsum.photos/1200/630?image=1062">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    </noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HVACBusiness",
+        "name": "HVAC Pro",
+        "image": "https://picsum.photos/200/200?image=1074",
+        "@id": "https://hvac-pro-example.com/",
+        "url": "https://hvac-pro-example.com/",
+        "telephone": "(123) 456-7890",
+        "description": "HVAC Pro offers expert heating, ventilation, and air conditioning services including installation, repair, and maintenance.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Main St",
+          "addressLocality": "Anytown",
+          "addressRegion": "IL",
+          "postalCode": "12345",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Anytown"
+        }
+      }
+      </script>
+</head>
+  <body>
+    <script>
+      // Ensure 'process' and 'process.env' objects exist in the browser context.
+      // This prevents ReferenceErrors if libraries expect them to be defined globally,
+      // while still allowing the environment to inject actual 'env' variables.
+      if (typeof process === 'undefined') {
+        window.process = { env: {} };
+      } else if (typeof process.env === 'undefined') {
+        process.env = {};
+      }
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

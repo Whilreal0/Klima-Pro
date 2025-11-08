@@ -1,0 +1,11 @@
+# robots.txt for KlimaPro PH
+# Learn more: https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt
+
+User-agent: *
+Allow: /
+
+# Block build tooling endpoints that should never be crawled
+Disallow: /@vite/
+
+# Provide the location of your XML sitemap (update to production URL once deployed)
+Sitemap: https://hvac-pro-example.com/sitemap.xml
