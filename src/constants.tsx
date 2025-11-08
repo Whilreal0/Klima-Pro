@@ -1,7 +1,17 @@
 import React from 'react';
 import { FaAward, FaCalendarCheck, FaClock, FaFan, FaFireAlt, FaHandsHelping, FaShieldAlt, FaSnowflake, FaStar, FaTools, FaWind } from 'react-icons/fa';
 
-const imageAsset = (relativePath: string) => new URL(`./assets/${relativePath}`, import.meta.url).href;
+const assetMap = import.meta.glob('./assets/**/*', { eager: true, import: 'default' }) as Record<string, string>;
+
+const imageAsset = (relativePath: string) => {
+    const key = `./assets/${relativePath}`;
+    const assetUrl = assetMap[key];
+    if (!assetUrl) {
+        console.warn(`Asset not found for path: ${key}`);
+        return relativePath;
+    }
+    return assetUrl;
+};
 
 type IconComponentProps = { className?: string };
 
