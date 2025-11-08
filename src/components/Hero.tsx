@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaCalendarCheck, FaCheckCircle, FaClock, FaShieldAlt } from 'react-icons/fa';
 import { navigateTo } from '../utils/navigation';
+import heroBackground from '@/assets/images/services/ac-installation.webp';
 
 const Hero: React.FC = () => {
     const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -13,7 +14,7 @@ const Hero: React.FC = () => {
             {/* Background Image with Overlay */}
             <div className="absolute inset-0">
                 <img 
-                    src="/src/assets/images/services/ac-installation.webp"
+                    src={heroBackground}
                     alt="KlimaPro PH technician performing maintenance on a modern high-efficiency air conditioning system" 
                     className="w-full h-full object-cover opacity-30"
                     fetchPriority="high"

@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaAward, FaCalendarCheck, FaClock, FaFan, FaFireAlt, FaHandsHelping, FaShieldAlt, FaSnowflake, FaStar, FaTools, FaWind } from 'react-icons/fa';
 
+const imageAsset = (relativePath: string) => new URL(`./assets/${relativePath}`, import.meta.url).href;
+
 type IconComponentProps = { className?: string };
 
 const iconClass = (className?: string) => className ?? '';
@@ -195,7 +197,7 @@ export const allServicesData: Record<string, ServiceDetail> = {
         name: 'AC Installation',
         slug: 'ac-installation',
         tagline: 'Stay Cool with Expert AC Installation',
-        imageUrl: '/src/assets/images/services/ac-installation.webp',
+        imageUrl: imageAsset('images/services/ac-installation.webp'),
         description: 'When the tropical heat hits, a reliable air conditioner isn\'t a luxury—it\'s a necessity. At KlimaPro PH, we specialize in seamless, high-efficiency AC installations tailored to your home\'s specific needs. Our certified technicians will help you choose the right system, ensuring optimal performance, energy savings, and ultimate comfort.',
         benefits: ['Lower Energy Bills', 'Improved Air Quality', 'Consistent Cooling', 'Increased Home Value', 'Quiet Operation'],
         processSteps: [
@@ -204,13 +206,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Installation', description: 'Our certified technicians install your new AC system to manufacturer specifications.' },
             { number: 4, title: 'Testing', description: 'We test the system to ensure it runs at peak performance and efficiency.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'ac-repair': {
         name: 'AC Repair',
         slug: 'ac-repair',
         tagline: 'Fast, Reliable Air Conditioner Repair',
-        imageUrl: '/src/assets/images/services/ac-repair.webp',
+        imageUrl: imageAsset('images/services/ac-repair.webp'),
         description: 'A broken AC on a hot tropical day is an emergency. Our team is ready to respond quickly with 24/7 emergency service. We diagnose issues accurately and provide transparent, upfront pricing before any work begins. From simple fixes to complex repairs, we have the tools and expertise to get your system back up and running in no time.',
         benefits: ['Restore Comfort Quickly', 'Prevent Further Damage', 'Improve System Efficiency', 'Extend Lifespan of Unit', 'Peace of Mind'],
         processSteps: [
@@ -219,13 +226,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Repair', description: 'Our certified technicians use quality parts to perform the necessary repairs efficiently.' },
             { number: 4, title: 'Testing', description: 'We test the system thoroughly to ensure it\'s running safely and effectively before we leave.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-1.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+        ],
     },
     'ductless-systems': {
         name: 'Ductless Systems',
         slug: 'ductless-systems',
         tagline: 'Flexible, Efficient Zone Cooling & Heating',
-        imageUrl: '/src/assets/images/services/ductless-systems.webp',
+        imageUrl: imageAsset('images/services/ductless-systems.webp'),
         description: 'Ductless mini-split systems offer a flexible and energy-efficient alternative to traditional HVAC. Perfect for home additions, older homes without ductwork, or for zoning specific areas, these systems provide targeted comfort where you need it most.',
         benefits: ['Energy Efficiency', 'Zoned Comfort', 'Easy Installation', 'Improved Air Quality', 'Quiet Operation'],
         processSteps: [
@@ -234,13 +246,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Installation', description: 'Connect the units with minimal disruption to your home.' },
             { number: 4, title: 'Review', description: 'Demonstrate the system’s operation and remote control features.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'heat-pump-services': {
         name: 'Heat Pump Services',
         slug: 'heat-pump-services',
         tagline: 'All-in-One Heating and Cooling Solution',
-        imageUrl: '/src/assets/images/services/heat-pump.webp',
+        imageUrl: imageAsset('images/services/heat-pump.webp'),
         description: 'Heat pumps are an incredibly efficient way to both heat and cool your home. They work by transferring heat, rather than creating it, providing year-round comfort in a single system. We offer expert installation, repair, and maintenance for all types of heat pumps.',
         benefits: ['Single System for Heating & Cooling', 'High Energy Efficiency', 'Lower Utility Bills', 'Reduced Carbon Footprint', 'Consistent Comfort'],
         processSteps: [
@@ -249,13 +266,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Integration', description: 'Connect and configure the smart thermostat for optimal performance.' },
             { number: 4, title: 'Testing', description: 'Run the system in both heating and cooling modes to verify correct operation.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
     'furnace-installation': {
         name: 'Furnace Installation',
         slug: 'furnace-installation',
         tagline: 'Reliable Heating for a Warm, Cozy Home',
-        imageUrl: '/src/assets/images/services/ac-repair.webp',
+        imageUrl: imageAsset('images/services/ac-repair.webp'),
         description: 'A dependable furnace is key to surviving cool seasons. We provide professional installation of high-efficiency gas and electric furnaces. Our experts will ensure your new system is sized correctly and installed for maximum safety and performance.',
         benefits: ['Improved Energy Efficiency', 'Reliable & Consistent Heat', 'Enhanced Safety Features', 'Long-Term Cost Savings', 'Quiet Performance'],
         processSteps: [
@@ -264,13 +286,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Installation', description: 'Remove the old unit and install the new furnace, ensuring all connections are secure.' },
             { number: 4, title: 'Checks', description: 'Perform thorough safety checks for gas leaks and carbon monoxide.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
     'furnace-repair': {
         name: 'Furnace Repair',
         slug: 'furnace-repair',
         tagline: 'Expert Furnace Repair to Keep You Warm',
-        imageUrl: '/src/assets/images/services/heat-pump.webp',
+        imageUrl: imageAsset('images/services/heat-pump.webp'),
         description: 'When your furnace fails, you need fast, reliable service. Our certified technicians are available 24/7 to diagnose and fix any furnace issue. We service all makes and models, ensuring your heat is restored quickly and safely.',
         benefits: ['Fast Emergency Service', 'Safe & Reliable Repairs', 'Extend Furnace Lifespan', 'Improved Heating Performance', 'Upfront Pricing'],
         processSteps: [
@@ -279,13 +306,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Repair', description: 'Use high-quality parts to complete the repair and restore your heat.' },
             { number: 4, title: 'Testing', description: 'Ensure the furnace is operating safely and efficiently.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
     'boiler-services': {
         name: 'Boiler Services',
         slug: 'boiler-services',
         tagline: 'Comprehensive Boiler Installation & Repair',
-        imageUrl: '/src/assets/images/services/ac-installation.webp',
+        imageUrl: imageAsset('images/services/ac-installation.webp'),
         description: 'Boilers provide comfortable, radiant heat that is gentle and consistent. Our team specializes in the installation, repair, and maintenance of residential boiler systems. Trust our experts for all your hydronic heating needs.',
         benefits: ['Comfortable Radiant Heat', 'Quiet Operation', 'High Efficiency', 'Long System Lifespan', 'Excellent Air Quality'],
         processSteps: [
@@ -294,13 +326,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Check', description: 'Ensure all radiators or in-floor heating loops are functioning correctly.' },
             { number: 4, title: 'Testing', description: 'Test the system for leaks and ensure it is operating at the correct pressure.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'duct-cleaning': {
         name: 'Duct Cleaning',
         slug: 'duct-cleaning',
         tagline: 'Breathe Cleaner, Healthier Air',
-        imageUrl: '/src/assets/images/services/ductless-systems.webp',
+        imageUrl: imageAsset('images/services/ductless-systems.webp'),
         description: 'Over time, your home\'s air ducts can accumulate dust, debris, allergens, and mold. Our professional duct cleaning service removes these contaminants, improving your indoor air quality and helping your HVAC system run more efficiently.',
         benefits: ['Removes Allergens & Dust', 'Improves Airflow', 'Enhances HVAC Efficiency', 'Reduces Odors', 'Healthier Living Environment'],
         processSteps: [
@@ -309,13 +346,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Agitation', description: 'Use specialized tools to agitate and dislodge debris from duct walls.' },
             { number: 4, title: 'Cleaning', description: 'Clean registers, grilles, and the furnace blower for a complete service.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'air-purifiers': {
         name: 'Air Purifiers',
         slug: 'air-purifiers',
         tagline: 'Whole-Home Air Purification Systems',
-        imageUrl: '/src/assets/images/services/ac-repair.webp',
+        imageUrl: imageAsset('images/services/ac-repair.webp'),
         description: 'Go beyond standard filtration with a whole-home air purifier. These systems integrate directly with your HVAC system to remove airborne contaminants like viruses, bacteria, pollen, and VOCs, providing cleaner air in every room of your house.',
         benefits: ['Removes Up to 99% of Contaminants', 'Reduces Allergies & Asthma', 'Neutralizes Odors', 'Captures Viruses & Bacteria', 'Low Maintenance'],
         processSteps: [
@@ -324,13 +366,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Sealing', description: 'Ensure all connections are sealed and the system is operating correctly.' },
             { number: 4, title: 'Maintenance', description: 'Explain filter replacement schedules and ongoing maintenance.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
     'humidifiers': {
         name: 'Humidifiers & Dehumidifiers',
         slug: 'humidifiers',
         tagline: 'Control Your Home\'s Humidity Levels',
-        imageUrl: '/src/assets/images/services/heat-pump.webp',
+        imageUrl: imageAsset('images/services/heat-pump.webp'),
         description: 'Proper humidity levels are crucial for comfort and health. Dry winter air can cause irritated sinuses and static electricity, while humid summer air can promote mold growth. We install whole-home systems to maintain optimal humidity year-round.',
         benefits: ['Increase Comfort', 'Protect Wood Floors & Furniture', 'Reduce Viruses & Bacteria', 'Prevent Mold & Mildew', 'Improve Energy Efficiency'],
         processSteps: [
@@ -339,13 +386,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Installation', description: 'Integrate the unit with your ductwork and water supply (if applicable).' },
             { number: 4, title: 'Setup', description: 'Set up the humidistat and show you how to maintain your desired humidity level.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
     'system-tune-up': {
         name: 'System Tune-Up',
         slug: 'system-tune-up',
         tagline: 'Preventative Maintenance for Peak Performance',
-        imageUrl: '/src/assets/images/services/ac-installation.webp',
+        imageUrl: imageAsset('images/services/ac-installation.webp'),
         description: 'Regular maintenance is the key to a long-lasting and efficient HVAC system. Our comprehensive tune-up service inspects, cleans, and adjusts your system to ensure it\'s ready for the season ahead, helping to prevent costly breakdowns and lower energy bills.',
         benefits: ['Prevent Breakdowns', 'Increase Efficiency', 'Lower Energy Costs', 'Improve Safety', 'Extend System Lifespan'],
         processSteps: [
@@ -354,13 +406,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Calibration', description: 'Calibrate the thermostat and check refrigerant levels.' },
             { number: 4, title: 'Reporting', description: 'Provide a detailed report of your system’s health and any recommendations.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'maintenance-plans': {
         name: 'Maintenance Plans',
         slug: 'maintenance-plans',
         tagline: 'Peace of Mind with Our Comfort Plan',
-        imageUrl: '/src/assets/images/services/ductless-systems.webp',
+        imageUrl: imageAsset('images/services/ductless-systems.webp'),
         description: 'Protect your investment with our Comfort Plan. For a low annual fee, you get two precision tune-ups per year (one for heating, one for cooling), priority service, and discounts on any necessary repairs. It\'s the easiest way to keep your system running at its best.',
         benefits: ['Two Annual Tune-Ups', 'Priority Scheduling', 'Discounts on Repairs', 'No Overtime Charges', 'Transferable Plan'],
         processSteps: [
@@ -369,13 +426,18 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Enjoy', description: 'Relax knowing your system is protected and you have priority access to our team.' },
             { number: 4, title: 'Reminders', description: 'We\'ll remind you when it\'s time for your next scheduled tune-up.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-2.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-2.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+        ],
     },
     'commercial-hvac': {
         name: 'Commercial HVAC',
         slug: 'commercial-hvac',
         tagline: 'Reliable HVAC Solutions for Your Business',
-        imageUrl: '/src/assets/images/services/ac-repair.webp',
+        imageUrl: imageAsset('images/services/ac-repair.webp'),
         description: 'We provide comprehensive HVAC services for commercial properties, including rooftop units, multi-zone systems, and preventative maintenance contracts. Our goal is to keep your business comfortable for employees and customers, while minimizing downtime and operational costs.',
         benefits: ['Rooftop Unit Expertise', 'Customized Maintenance Plans', 'Fast, Reliable Service', 'Energy Management Solutions', 'Improved Tenant/Employee Comfort'],
         processSteps: [
@@ -384,7 +446,12 @@ export const allServicesData: Record<string, ServiceDetail> = {
             { number: 3, title: 'Execution', description: 'Our certified commercial technicians perform the work efficiently and to code.' },
             { number: 4, title: 'Support', description: 'Offer ongoing maintenance and priority support to keep your business running smoothly.' },
         ],
-        galleryImages: ['/src/assets/images/gallery/hvac-3.webp','/src/assets/images/gallery/hvac-4.webp','/src/assets/images/gallery/hvac-1.webp','/src/assets/images/gallery/hvac-2.webp'],
+        galleryImages: [
+            imageAsset('images/gallery/hvac-3.webp'),
+            imageAsset('images/gallery/hvac-4.webp'),
+            imageAsset('images/gallery/hvac-1.webp'),
+            imageAsset('images/gallery/hvac-2.webp'),
+        ],
     },
 };
 

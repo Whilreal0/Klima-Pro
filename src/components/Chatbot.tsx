@@ -51,6 +51,13 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
     const currentIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
     const currentSetIsOpen = externalSetIsOpen || setIsOpen;
 
+    const contactDetails = {
+        mainPhone: '+639178901234',
+        emergencyPhone: '+639187654321',
+        email: 'info@klimapro.ph',
+        serviceArea: 'Metro Manila, Philippines',
+    };
+
     const handleChatbotToggle = () => {
         const newState = !currentIsOpen;
         currentSetIsOpen(newState);
@@ -118,6 +125,28 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
         setInput('');
         setIsLoading(true);
 
+        const normalized = input.toLowerCase();
+        const quickReplies: string[] = [];
+
+        if (['phone', 'call', 'number', 'contact number', 'reach you'].some((keyword) => normalized.includes(keyword))) {
+            quickReplies.push(`You can reach Klima Pro at ${contactDetails.mainPhone}, or ${contactDetails.emergencyPhone} for urgent calls.`);
+        }
+
+        if (['email', 'mail', 'email address'].some((keyword) => normalized.includes(keyword))) {
+            quickReplies.push(`Send us a note at ${contactDetails.email}.`);
+        }
+
+        if (['location', 'address', 'where are you', 'where located', 'service area'].some((keyword) => normalized.includes(keyword))) {
+            quickReplies.push(`We serve clients across ${contactDetails.serviceArea}.`);
+        }
+
+        if (quickReplies.length > 0) {
+            const botMessage: Message = { sender: 'bot', text: quickReplies.join(' ') };
+            setMessages((prev) => [...prev, botMessage]);
+            setIsLoading(false);
+            return;
+        }
+
         // Dynamically import the Gemini SDK only when a chat message is sent to keep the initial bundle lighter.
         let ai: import('@google/generative-ai').GoogleGenerativeAI;
         try {
@@ -141,7 +170,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen: externalIsOpen, setIsOpen: ex
         try {
             const model = ai.getGenerativeModel({ 
                 model: 'gemini-2.0-flash-exp',
-                systemInstruction: "You are 'ProBot', the friendly and knowledgeable virtual assistant for HVAC Pro. Your expertise is strictly limited to heating, ventilation, and air conditioning (HVAC) services. This includes topics like AC installation, AC repair, furnace and heating services, duct cleaning, heat pumps, our maintenance 'Comfort Plans', and financing options. Do not answer questions about any other subjects, including math, history, or general knowledge. If asked an unrelated question, you must politely decline and pivot back to how you can assist with their HVAC needs. For example, say: 'I can only assist with questions about our HVAC services. How can I help you with your heating or cooling system today?' Your goal is to provide helpful, accurate information about our services and encourage users to book an appointment."
+                systemInstruction: "You are 'ProBot', the friendly and knowledgeable virtual assistant for HVAC Pro. Your expertise is strictly limited to heating, ventilation, and air conditioning (HVAC) services. This includes topics like AC installation, AC repair, furnace and heating services, duct cleaning, heat pumps, our maintenance 'Comfort Plans', and financing options. Do not answer questions about any other subjects, including math, history, or general knowledge. If asked an unrelated question, you must politely decline and pivot back to how you can assist with their HVAC needs. For example, say: 'I can only assist with questions about our HVAC services. How can I help you with your heating or cooling system today?' Keep responses short and focused—no more than three sentences while staying helpful. Your goal is to provide helpful, accurate information about our services and encourage users to book an appointment."
             });
             
             const result = await model.generateContent(input);
